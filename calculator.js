@@ -96,7 +96,6 @@ document.getElementById("divide").addEventListener("click", function(){
 
 
 document.getElementById("equal").addEventListener("click", function(){
-    //call function to add plus to textbox
     var screen = document.getElementById('screen');
     var lastChar = screen.textContent.slice(-1);
     if(lastChar >=0){
@@ -110,7 +109,6 @@ document.getElementById("equal").addEventListener("click", function(){
 
 
 document.getElementById("ce").addEventListener("click", function(){
-    //call function to add plus to textbox
         var screen = document.getElementById('screen');
         var history = document.getElementById("history");
 
@@ -124,7 +122,7 @@ document.getElementById("ce").addEventListener("click", function(){
             history.textContent="";
             isTotalDone=false;
         }
-    
+
 });
 
 function operators(opr){
@@ -161,7 +159,6 @@ function operators(opr){
         if (opr=="divide" && lastChar != "÷"){
             screen.textContent = screen.textContent + "÷";
 
-            //calcTextBox.value = calcTextBox.value + "&#247";
         }
     //} else {
     //     display("ERROR");
