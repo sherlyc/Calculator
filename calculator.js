@@ -175,8 +175,8 @@ function calculate(){
     var screen = document.getElementById("screen");
     var history= screen.textContent;
     var str = screen.textContent;
-    //var newStr = str.replace('÷','/').replace('x', '*');
-    var total=eval(str);
+    newStr = str.replace('÷','/').replace('x', '*');
+    var total=eval(newStr);
     total= Math.round( total * 10 ) / 10;
     screen.textContent=total;
     isTotalDone=true;
