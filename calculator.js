@@ -3,7 +3,6 @@ var isTotalDone = false;
 var isError = false;
 setupListener();
 
-
 function setupListener(){ //setup event listeners for all buttons
     var numButtons = document.querySelectorAll(".number");
     var funButtons = document.querySelectorAll(".function")
@@ -20,28 +19,20 @@ function setupListener(){ //setup event listeners for all buttons
             operators(this);
         });
     }
-
-
 }
 
 function printNumber(value){
     var currentNum = screen.textContent;
-    // if (eval(currentNum) == 0 && currentNum.indexOf(".") == -1){
-    //     screen.textContent = value;
-    // } else {
-    //     screen.textContent += value;
-    // }
     if(currentNum==0){
         screen.textContent = value;
         return;
     }
-     if(isTotalDone ==true||isError==true){
+    if(isTotalDone ==true||isError==true){
         resetAll();
         screen.textContent = value;
     } else {
         screen.textContent += value;
     }
-
 }
 
 function operators(obj){
@@ -60,7 +51,7 @@ function operators(obj){
     }
 
     if(obj.id=="ce"){
-        backspace();
+        ce();
         return;
     }
     if(obj.id=="allclear"){
@@ -68,30 +59,17 @@ function operators(obj){
         return;
     }
 
-
     var lastChar = screen.textContent.slice(-1);
     if(isNaN(lastChar)==true){ //if last entry is an operator
         if (obj.id=="minus" && lastChar != '-'){ //allow negative
-
             screen.textContent = screen.textContent + "-";
             return;
-
         }
         screen.textContent = screen.textContent.slice(0, -1) + obj.value; //remove last operator and add current one.
-
     } else {
         screen.textContent += obj.value;
     }
-
 }
-// function zero(){
-//     var currentNum = screen.textContent;
-//     if(eval(currentNum)==0){ && (currentNum.indexOf(".") == -1){
-//         console.log("i dunno");
-//     }
-//
-// }
-
 
 function decimal(){
 
@@ -140,16 +118,13 @@ function error(){
     isError=true;
 }
 
-
-function backspace(){
+function ce(){//function clear last entry *backspace delete
     var history = document.getElementById("history");
     if(isTotalDone==false){
         screen.textContent = screen.textContent.slice(0, -1);
-
     } else {
         screen.textContent="";
         history.textContent="";
         isTotalDone=false;
     }
-
 };
