@@ -122,7 +122,10 @@ document.getElementById("ce").addEventListener("click", function(){
             history.textContent="";
             isTotalDone=false;
         }
+        //phone_number.pop(); //Remove the last element from the phone number. It's length is maintained by js itself.
+        //return false; //What's this for?
 
+    //removeLastEntry();
 });
 
 function operators(opr){
@@ -159,18 +162,22 @@ function operators(opr){
         if (opr=="divide" && lastChar != "÷"){
             screen.textContent = screen.textContent + "÷";
 
+
         }
     //} else {
     //     display("ERROR");
 
     }
+
+}
+
 function calculate(){
     var screen = document.getElementById("screen");
     var history= screen.textContent;
     var str = screen.textContent;
-    var newStr = str.replace('÷','/').replace('x', '*');
-    console.log(newStr);
-    var total=eval(newStr);
+    //var newStr = str.replace('÷','/').replace('x', '*');
+    var total=eval(str);
+    total= Math.round( total * 10 ) / 10;
     screen.textContent=total;
     isTotalDone=true;
     displayCalc(history+"=");
