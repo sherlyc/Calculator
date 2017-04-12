@@ -1,98 +1,52 @@
-var arrScreen = [];
-
-var numButtons = document.querySelectorAll(".number");
+var screen = document.getElementById("screen");
+var history = document.getElementById("history");
 var isTotalDone = false;
+var isError = false;
 setupListener();
 
 
 function setupListener(){
+    var numButtons = document.querySelectorAll(".number");
+    var operButtons = document.querySelectorAll(".opr")
+
     for (var i = 0; i < numButtons.length; i++){
         numButtons[i].addEventListener("click", function(){
-        printNumber(this.id);
+            printNumber(this.id);
 
         });
     }
-}
 
-function printNumber(id){
-    switch (id){
-        case "zero":
-            var num = 0;
-            break;
-        case "one":
-            var num = 1;
-            break;
-        case "two":
-            var num = 2;
-            break;
-        case "three":
-            var num = 3;
-            break;
-        case "four":
-            var num = 4;
-            break;
-        case "five":
-            var num = 5;
-            break;
-        case "six":
-            var num = 6;
-            break;
-        case "seven":
-            var num = 7;
-            break;
-        case "eight":
-            var num = 8;
-            break;
-        case "nine":
-            var num = 9;
-            break;
-
+    for (var i = 0; i < operButtons.length; i++) {
+        operButtons[i].addEventListener("click", function(){
+            operators(this.id);
+        });
     }
 
-    display(num);
 
 }
 
-function display(str){
-    var screen = document.getElementById("screen");
-    var history = document.getElementById("history");
-
-    if (screen.textContent=="0" || isTotalDone==true){
-        history.textContent="";
-        screen.textContent="";
-        isTotalDone=false;
+function printNumber(value){
+    if(screen.textContent=="0"||isTotalDone ==true||isError==true){
+        resetAll();
+        screen.textContent = value;
+    } else {
+        screen.textContent += value;
     }
-    if (str!="ERROR"){
-        screen.textContent = screen.textContent + str;
-        //isTotalDone=false;
 
-    } else { //print error
-        screen.textContent = str;
-        isTotalDone=false;
-
-    }
 }
 
+function resetAll(){
+    history.textContent="";
+    screen.textContent="";
+    isError=false;
+    isTotalDone=false;
+}
 
-document.getElementById("plus").addEventListener("click", function(){
-    operators("plus");
-});
-
-document.getElementById("dot").addEventListener("click", function(){
-    operators("dot");
-});
-
-document.getElementById("minus").addEventListener("click", function(){
-    operators("minus");
-});
-
-document.getElementById("times").addEventListener("click", function(){
-    operators("times");
-});
-
-document.getElementById("divide").addEventListener("click", function(){
-    operators("divide");
-});
+function error(){
+    screen.textContent = "ERROR";
+    isTotalDone=false;
+    isError=true;
+}
 
 
 document.getElementById("equal").addEventListener("click", function(){
@@ -101,7 +55,7 @@ document.getElementById("equal").addEventListener("click", function(){
     if(lastChar >=0){
         calculate();
     } else {
-        display("ERROR");
+        error();
     }
 
 });
@@ -122,10 +76,7 @@ document.getElementById("ce").addEventListener("click", function(){
             history.textContent="";
             isTotalDone=false;
         }
-        //phone_number.pop(); //Remove the last element from the phone number. It's length is maintained by js itself.
-        //return false; //What's this for?
 
-    //removeLastEntry();
 });
 
 function operators(opr){
@@ -162,10 +113,7 @@ function operators(opr){
         if (opr=="divide" && lastChar != "÷"){
             screen.textContent = screen.textContent + "÷";
 
-
         }
-    //} else {
-    //     display("ERROR");
 
     }
 
