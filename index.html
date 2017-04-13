@@ -7,27 +7,38 @@
 
     </head>
     <body>
-        <div>
+        <h1>Calculator</h1>
+        <div class="container">
             <div id="history"></div>
             <div id="screen">0</div>
-            <button id="1" class="number">1</button>
-            <button id="2" class="number">2</button>
-            <button id="3" class="number">3</button>
-            <button id="4" class="number">4</button>
-            <button id="5" class="number">5</button>
-            <button id="6" class="number">6</button>
-            <button id="7" class="number">7</button>
-            <button id="8" class="number">8</button>
-            <button id="9" class="number">9</button>
-            <button id="0" class="number">0</button>
-            <button id="decimal" class="function">.</button>
-            <button id="plus" value="+" class="function">+</button>
-            <button id="minus" value="-" class="function">-</button>
-            <button id="times" value="x" class="function">&#215</button>
-            <button id="divide" value="÷" class="function">&#247</button>
-            <button id="equal" class="function">=</button>
-            <button id="allclear" class="function">c</button>
-            <button id="ce" class="function">ce</button>
+            <div class="keypads row_0">
+                <button id="allclear" class="function btn clear">AC</button>
+                <button id="ce" class="function btn clear">CE</button>
+            </div>
+            <div class="keypads row_1">
+                <button id="7" class="number btn">7</button>
+                <button id="8" class="number btn">8</button>
+                <button id="9" class="number btn">9</button>
+                <button id="divide" value="÷" class="function btn">&#247</button>
+            </div>
+            <div class="keypads row_2">
+                <button id="4" class="number btn">4</button>
+                <button id="5" class="number btn">5</button>
+                <button id="6" class="number btn">6</button>
+                <button id="times" value="x" class="function btn">&#215</button>
+            </div>
+            <div class="keypads row_3">
+                <button id="1" class="number btn">1</button>
+                <button id="2" class="number btn">2</button>
+                <button id="3" class="number btn">3</button>
+                <button id="minus" value="-" class="function btn">-</button>
+            </div>
+            <div class="keypads row_4">
+                <button id="0" class="number btn">0</button>
+                <button id="decimal" class="function btn">.</button>
+                <button id="plus" value="+" class="function btn">+</button>
+                <button id="equal" class="function btn">=</button>
+            </div>
         </div>
         <script type="text/javascript" src="calculator.js"></script>
     </body>

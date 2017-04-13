@@ -1,17 +1,106 @@
-#history {
-    width: 50%;
-    height: 1em;
-}
+
 
 body {
+    font-family: Verdana;
     font-size: 2em;
+    max-width: 50%;
+    min-width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+.container {
+    display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    min-width: 60%;
+}
+#history {
+    font-size: 0.5em;
+    color: gray;
+}
+
+ #history, #screen {
+    display: flex;
+    flex-wrap: wrap;
+    flex : 0 1 100%;
+    width: 100%;
+    padding-bottom: 5px;
+
+}
+
+#screen {
+    border: 1px solid gray;
+    border-radius: 5px;
+    overflow: auto;
+}
+
+.keypads {
+    display:flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+#history {
+    height: 1em;
+    justify-content: flex-end;
+}
+
+#screen {
+    border: 1px solid black;
+    height: 1em;
+    justify-content: flex-end;
+    background: #b2dfdb;
+
 }
 
 
-.number , .opr , .clear{
+.btn {
+    flex: 0 1 25%;
+    margin: 5px 10px;
+    border: 0;
+    background: #009688;
+    color: white;
+    outline: none;
+    padding: 8px 14px;
+    font-weight: bold;
+    font-size: 18px;
+    text-decoration: none;
+    display: inline-block; /* needed for anchors */
+    position: relative;
+    box-shadow: 1px 0px #00796b, 0px 1px #b2dfdb,
+                  2px 1px #00796b, 1px 2px #b2dfdb,
+                  3px 2px #00796b, 2px 3px #b2dfdb,
+                  4px 3px #00796b, 3px 4px #b2dfdb,
+                  5px 4px #00796b, 4px 5px #b2dfdb,
+                  6px 5px #00796b, 5px 6px #b2dfdb;
+}
 
-	height: 3em;
-	width: 3em;
-	background: silver;
-	border: 2px solid gray;
+.btn:hover:focus {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 0px #00796b, 0px 1px #b2dfdb,
+              2px 1px #00796b, 1px 2px #b2dfdb,
+              3px 2px #00796b, 2px 3px #b2dfdb,
+              4px 3px #00796b, 3px 4px #b2dfdb;
+}
+
+.btn:hover:focus:active{
+    transform: translate(4px, 4px);
+    box-shadow: 1px 0px #00796b, 0px 1px #b2dfdb,
+              2px 1px #00796b, 1px 2px #b2dfdb;
+}
+.clear {
+    flex-grow: 2;
+}
+
+#equal {
+    background: #ffc107;
+    box-shadow: 1px 0px #e6b800, 0px 1px #ffff66,
+                  2px 1px #e6b800, 1px 2px #ffff66,
+                  3px 2px #e6b800, 2px 3px #ffff66,
+                  4px 3px #e6b800, 3px 4px #ffff66,
+                  5px 4px #e6b800, 4px 5px #ffff66,
+                  6px 5px #e6b800, 5px 6px #ffff66;
 }
