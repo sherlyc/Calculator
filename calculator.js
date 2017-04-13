@@ -1,4 +1,6 @@
 var screen = document.getElementById("screen");
+var isNoneZero=false;
+var hasDecimal=false;
 var isTotalDone = false;
 var isError = false;
 setupListener();
@@ -22,26 +24,52 @@ function setupListener(){ //setup event listeners for all buttons
 }
 
 function printNumber(value){ //this function will add digits to the calculator screen
-    var currentNum = screen.textContent;
-    if(currentNum==0){
-        screen.textContent = value;
-        return;
-    }
-    if(isTotalDone ==true||isError==true){
+
+    if (isError){
         resetAll();
-        screen.textContent = value;
+    }
+
+    var currentVal = screen.textContent;
+    if(currentVal==0 &&  currentVal.charAt(currentVal.length-1) != '.' || isTotalDone==true) {
+        screen.textContent=value;
+        isNoneZero=true;
     } else {
         screen.textContent += value;
+        isNoneZero=true;
     }
+    isTotalDone=false;
+}
+
+function zero(){
+
+    var currentVal = screen.textContent;
+    console.log("currentVal:" +currentVal);
+    if(currentVal==0 && currentVal.charAt(currentVal.length-1) != '.'|| isTotalDone==true){ //if screen is default to zero number
+        screen.textContent="0";
+        isTotalDone=false;
+        return;
+    }
+    var lastChar = screen.textContent.slice(-1); //get the last entered number or operator.
+    if(isNaN(lastChar)==true){ //if last entry is operator, allow zero
+        screen.textContent+="0";
+        isNoneZero=false;
+        return;
+    }
+    if (hasDecimal||isNoneZero){//can insert as many zero if there is a decimal point;
+        screen.textContent +="0";
+    }
+
 }
 
 function operators(obj){
+
     if (isError){ //if there was an error, reset all
         resetAll();
-    } else {
-        isTotalDone=false;
     }
-
+    if(obj.id=="zero"){
+        zero();
+        return;
+    }
     if(obj.id=="decimal"){
         decimal();
         return;
@@ -61,6 +89,7 @@ function operators(obj){
         return;
     }
 
+
     var lastChar = screen.textContent.slice(-1); //get the last entered number or operator.
     if(isNaN(lastChar)==true){ //if last entry is an operator
         if (obj.id=="minus" && lastChar != '-'){ //allow negative
@@ -72,31 +101,22 @@ function operators(obj){
         lastChar = screen.textContent.slice(-1);
         if (isNaN(lastChar)==false){ //is a number
             screen.textContent += obj.value;
-        } else {
-            screen.textContent = screen.textContent.slice(0, -1) + obj.value
+        } else { //remove last operator and add current one.
+            screen.textContent = screen.textContent.slice(0, -1) + obj.value;
 
-        }; //remove last operator and add current one.
-    } else {
+        };
+    } else { //not operator
         screen.textContent += obj.value;
     }
+    resetFlags();
 }
 
 function decimal(){ //this function takes care of decimal point.
 
-    var lastChar = screen.textContent.slice(-1);
-
-    if(screen.textContent=="0"||isTotalDone ==true||isError==true){
-        resetAll();
-        screen.textContent += ".";
-        return;
-    }
-
-    if (lastChar != '.' && lastChar >= 0 &&isTotalDone==false){ //check for duplicate decimal point
+    if(!hasDecimal){ //if user have not entered any decimal point yet
         screen.textContent +=".";
-        return;
+        hasDecimal=true;
     }
-
-    screen.textContent +="0.";
 }
 
 function calculate(){
@@ -104,11 +124,10 @@ function calculate(){
     if(lastChar >=0){ //if it is a number
         var historyStr = screen.textContent;
         var str = screen.textContent;
-        console.log(str);
         var newStr = str.replace(/÷/g,'/').replace(/x/g, '*'); //replace math symbols with js understood symbols
-        console.log(newStr);
         var total=eval(newStr);
-        total= Math.round( total * 10 ) / 10; //round the number to one decimal place
+        var roundPercision = 100000000000
+        total= Math.round( total * roundPercision ) / roundPercision; //round the number to one decimal place
         screen.textContent=total; //update the calculator with new total
         isTotalDone=true;
         document.getElementById("history").textContent=historyStr+"="; //update history
@@ -120,24 +139,26 @@ function calculate(){
 function resetAll(){ //clear all calculator entries including history.
     document.getElementById("history").textContent="";
     screen.textContent="0";
-    isError=false;
-    isTotalDone=false;
+    resetFlags();
 }
 
 function error(){ //Error message generator
     screen.textContent = "ERROR";
+    resetFlags();
+}
+
+function resetFlags(){
     isTotalDone=false;
-    isError=true;
+    isError=false;
+    hasDecimal=false;
+    isNoneZero=false;
 }
 
 function ce(){//function clear last entry *backspace delete
     var history = document.getElementById("history");
     if(isTotalDone==false && screen.textContent.length > 1){
         screen.textContent = screen.textContent.slice(0, -1);
-        //alert(screen.textContent.length);
     } else {
-        screen.textContent="0";
-        history.textContent="";
-        isTotalDone=false;
+        resetAll();
     }
 };
