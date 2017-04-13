@@ -2,7 +2,7 @@
 
 body {
     font-family: Verdana;
-    font-size: 2em;
+    font-size: 1.5em;
     max-width: 60%;
     margin: auto;
     text-align: center;
@@ -26,14 +26,18 @@ body {
     flex-wrap: wrap;
     flex : 0 1 100%;
     width: 100%;
-    padding-bottom: 5px;
 
 }
 
 #screen {
+    font-family: sans-serif;
+    font-size: 2em;
+    max-height: 1.3em;
     border: 1px solid gray;
     border-radius: 5px;
     overflow: auto;
+    padding-top: 3px;
+    margin: 2px;
 }
 
 .keypads {
@@ -45,13 +49,13 @@ body {
 }
 
 #history {
-    height: 1em;
+    height: 1.5em;
     justify-content: flex-end;
 }
 
 #screen {
     border: 1px solid black;
-    height: 1em;
+    height: 2em;
     justify-content: flex-end;
     background: #b2dfdb;
 
