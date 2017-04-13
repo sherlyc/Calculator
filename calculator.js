@@ -65,7 +65,15 @@ function operators(obj){
             screen.textContent = screen.textContent + "-";
             return;
         }
-        screen.textContent = screen.textContent.slice(0, -1) + obj.value; //remove last operator and add current one.
+        screen.textContent = screen.textContent.slice(0, -1)
+        //confirm no operator
+        lastChar = screen.textContent.slice(-1);
+        if (isNaN(lastChar)==false){
+            screen.textContent += obj.value;
+        } else {
+            screen.textContent = screen.textContent.slice(0, -1) + obj.value
+
+        }; //remove last operator and add current one.
     } else {
         screen.textContent += obj.value;
     }
