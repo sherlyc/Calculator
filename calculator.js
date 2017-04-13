@@ -102,7 +102,9 @@ function calculate(){
     if(lastChar >=0){ //if it is a number
         var historyStr = screen.textContent;
         var str = screen.textContent;
-        var newStr = str.replace('÷','/').replace('x', '*'); //replace math symbols with js understood symbols
+        console.log(str);
+        var newStr = str.replace(/÷/g,'/').replace(/x/g, '*'); //replace math symbols with js understood symbols
+        console.log(newStr);
         var total=eval(newStr);
         total= Math.round( total * 10 ) / 10; //round the number to one decimal place
         screen.textContent=total; //update the calculator with new total
