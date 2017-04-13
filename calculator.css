@@ -14,6 +14,8 @@ body {
     flex-direction: column;
     flex-wrap: wrap;
     min-width: 60%;
+    border: 1px solid gray;
+    padding: 10px;
 }
 #history {
     font-size: 0.5em;
