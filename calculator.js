@@ -36,8 +36,10 @@ function printNumber(value){ //this function will add digits to the calculator s
 }
 
 function operators(obj){
-    if (isTotalDone==true || isError){ //if user already completed a calculation or there was an error, reset all
+    if (isError){ //if there was an error, reset all
         resetAll();
+    } else {
+        isTotalDone=false;
     }
 
     if(obj.id=="decimal"){
@@ -68,7 +70,7 @@ function operators(obj){
         screen.textContent = screen.textContent.slice(0, -1)
         //confirm no operator
         lastChar = screen.textContent.slice(-1);
-        if (isNaN(lastChar)==false){
+        if (isNaN(lastChar)==false){ //is a number
             screen.textContent += obj.value;
         } else {
             screen.textContent = screen.textContent.slice(0, -1) + obj.value
@@ -89,7 +91,7 @@ function decimal(){ //this function takes care of decimal point.
         return;
     }
 
-    if (lastChar != '.' && lastChar >= 0){ //check for duplicate decimal point
+    if (lastChar != '.' && lastChar >= 0 &&isTotalDone==false){ //check for duplicate decimal point
         screen.textContent +=".";
         return;
     }
