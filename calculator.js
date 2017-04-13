@@ -120,10 +120,11 @@ function error(){ //Error message generator
 
 function ce(){//function clear last entry *backspace delete
     var history = document.getElementById("history");
-    if(isTotalDone==false){
+    if(isTotalDone==false && screen.textContent.length > 1){
         screen.textContent = screen.textContent.slice(0, -1);
+        //alert(screen.textContent.length);
     } else {
-        screen.textContent="";
+        screen.textContent="0";
         history.textContent="";
         isTotalDone=false;
     }
