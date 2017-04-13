@@ -33,9 +33,12 @@ function printNumber(value){ //this function will add digits to the calculator s
     if(currentVal==0 &&  currentVal.charAt(currentVal.length-1) != '.' || isTotalDone==true) {
         screen.textContent=value;
         isNoneZero=true;
+        alert(isNoneZero);
     } else {
         screen.textContent += value;
         isNoneZero=true;
+        alert(isNoneZero);
+
     }
     isTotalDone=false;
 }
@@ -43,52 +46,51 @@ function printNumber(value){ //this function will add digits to the calculator s
 function zero(){
 
     var currentVal = screen.textContent;
-    console.log("currentVal:" +currentVal);
-    if(currentVal==0 && currentVal.charAt(currentVal.length-1) != '.'|| isTotalDone==true){ //if screen is default to zero number
-        screen.textContent="0";
-        isTotalDone=false;
-        return;
-    }
-    var lastChar = screen.textContent.slice(-1); //get the last entered number or operator.
-    if(isNaN(lastChar)==true){ //if last entry is operator, allow zero
-        screen.textContent+="0";
-        isNoneZero=false;
-        return;
-    }
-    if (hasDecimal||isNoneZero){//can insert as many zero if there is a decimal point;
-        screen.textContent +="0";
-    }
+      console.log("currentVal:" +currentVal);
+      if(currentVal==0 && currentVal.charAt(currentVal.length-1) != '.'|| isTotalDone==true){ //if screen is default to zero number
+          alert("a");
+          screen.textContent="0";
+          isTotalDone=false;
+          console.log("a")
+          return;
+      }
+      var lastChar = screen.textContent.slice(-1); //get the last entered number or operator.
+      if(isNaN(lastChar)==true){ //if last entry is operator, allow zero
+          alert("b");
+
+          screen.textContent+="0";
+          isNoneZero=false;
+          console.log("b")
+          return;
+      }
+      if (hasDecimal||isNoneZero){//can insert as many zero if there is a decimal point;
+          alert("c");
+
+          screen.textContent +="0";
+          console.log("c")
+      }
 
 }
 
 function operators(obj){
 
+
     if (isError){ //if there was an error, reset all
         resetAll();
     }
-    if(obj.id=="zero"){
-        zero();
-        return;
-    }
-    if(obj.id=="decimal"){
-        decimal();
-        return;
-    }
 
-    if(obj.id=="equal"){
-        calculate();
-        return;
+    switch (obj.id) {
+        case "zero": zero();
+            return;
+        case "decimal": decimal();
+            return;
+        case "equal": calculate();
+            return;
+        case "ce": ce();
+            return;
+        case "allclear": resetAll();
+            return;
     }
-
-    if(obj.id=="ce"){
-        ce();
-        return;
-    }
-    if(obj.id=="allclear"){
-        resetAll();
-        return;
-    }
-
 
     var lastChar = screen.textContent.slice(-1); //get the last entered number or operator.
     if(isNaN(lastChar)==true){ //if last entry is an operator
