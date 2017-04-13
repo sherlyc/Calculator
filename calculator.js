@@ -21,7 +21,7 @@ function setupListener(){ //setup event listeners for all buttons
     }
 }
 
-function printNumber(value){
+function printNumber(value){ //this function will add digits to the calculator screen
     var currentNum = screen.textContent;
     if(currentNum==0){
         screen.textContent = value;
@@ -36,7 +36,7 @@ function printNumber(value){
 }
 
 function operators(obj){
-    if (isTotalDone==true || isError){ //if user already completed a calculation, reset all
+    if (isTotalDone==true || isError){ //if user already completed a calculation or there was an error, reset all
         resetAll();
     }
 
@@ -59,7 +59,7 @@ function operators(obj){
         return;
     }
 
-    var lastChar = screen.textContent.slice(-1);
+    var lastChar = screen.textContent.slice(-1); //get the last entered number or operator.
     if(isNaN(lastChar)==true){ //if last entry is an operator
         if (obj.id=="minus" && lastChar != '-'){ //allow negative
             screen.textContent = screen.textContent + "-";
@@ -71,7 +71,7 @@ function operators(obj){
     }
 }
 
-function decimal(){
+function decimal(){ //this function takes care of decimal point.
 
     var lastChar = screen.textContent.slice(-1);
 
@@ -81,7 +81,7 @@ function decimal(){
         return;
     }
 
-    if (lastChar != '.' && lastChar >= 0){
+    if (lastChar != '.' && lastChar >= 0){ //check for duplicate decimal point
         screen.textContent +=".";
         return;
     }
@@ -91,28 +91,28 @@ function decimal(){
 
 function calculate(){
     var lastChar = screen.textContent.slice(-1);
-    if(lastChar >=0){
+    if(lastChar >=0){ //if it is a number
         var historyStr = screen.textContent;
         var str = screen.textContent;
-        var newStr = str.replace('÷','/').replace('x', '*');
+        var newStr = str.replace('÷','/').replace('x', '*'); //replace math symbols with js understood symbols
         var total=eval(newStr);
-        total= Math.round( total * 10 ) / 10;
-        screen.textContent=total;
+        total= Math.round( total * 10 ) / 10; //round the number to one decimal place
+        screen.textContent=total; //update the calculator with new total
         isTotalDone=true;
-        document.getElementById("history").textContent=historyStr+"=";
+        document.getElementById("history").textContent=historyStr+"="; //update history
     } else {
         error();
     }
 }
 
-function resetAll(){
+function resetAll(){ //clear all calculator entries including history.
     document.getElementById("history").textContent="";
     screen.textContent="0";
     isError=false;
     isTotalDone=false;
 }
 
-function error(){
+function error(){ //Error message generator
     screen.textContent = "ERROR";
     isTotalDone=false;
     isError=true;
