@@ -24,7 +24,6 @@ function setupListener(){ //setup event listeners for all buttons
 }
 
 function printNumber(value){ //this function will add digits to the calculator screen
-
     if (isError){
         resetAll();
     }
@@ -42,7 +41,6 @@ function printNumber(value){ //this function will add digits to the calculator s
 }
 
 function zero(){
-
     var currentVal = screen.textContent;
       if(currentVal==0 && currentVal.charAt(currentVal.length-1) != '.'|| isTotalDone==true){ //if screen is default to zero number
           screen.textContent="0";
@@ -62,8 +60,6 @@ function zero(){
 }
 
 function operators(obj){
-
-
     if (isError){ //if there was an error, reset all
         resetAll();
     }
@@ -103,7 +99,6 @@ function operators(obj){
 }
 
 function decimal(){ //this function takes care of decimal point.
-
     if(!hasDecimal){ //if user have not entered any decimal point yet
         screen.textContent +=".";
         hasDecimal=true;
