@@ -12,7 +12,6 @@ function setupListener(){ //setup event listeners for all buttons
     for (var i = 0; i < numButtons.length; i++){
         numButtons[i].addEventListener("click", function(){
             printNumber(this.id);
-
         });
     }
 
